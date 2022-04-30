@@ -1,0 +1,9 @@
+/* Include the padding and border in an element's total width and height */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 396px;
+}
+

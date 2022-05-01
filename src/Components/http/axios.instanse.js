@@ -5,7 +5,10 @@ export const API_URL = 'http://localhost:3005/'
 const api = axios.create(
     {
         withCredentials: true,
-        baseURL: API_URL
+        baseURL: API_URL,
+        headers: {
+          'Content-Type': 'application/json'
+        }
     }
 )
 

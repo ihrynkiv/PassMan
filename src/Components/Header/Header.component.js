@@ -1,9 +1,11 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
-import React from 'react'
+import {
+  AppBar, IconButton, Toolbar, Typography,
+} from '@mui/material';
+import React from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-export const Header = ({ onHomeClick, onAddRecordClick }) => {
+export function Header({ onHomeClick, onAddRecordClick }) {
   return (
     <AppBar position="static" color="primary" style={{ width: '396px' }} title="PassMan2">
       <Toolbar>
@@ -15,7 +17,7 @@ export const Header = ({ onHomeClick, onAddRecordClick }) => {
           sx={{ mr: 2 }}
           onClick={onHomeClick}
         >
-          <HomeIcon/>
+          <HomeIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           PassMan
@@ -28,9 +30,11 @@ export const Header = ({ onHomeClick, onAddRecordClick }) => {
           color="inherit"
           onClick={onAddRecordClick}
         >
-          <AddCircleIcon/>
+          <AddCircleIcon />
         </IconButton>
       </Toolbar>
     </AppBar>
-  )
+  );
 }
+
+

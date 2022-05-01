@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import { withCookies } from 'react-cookie';
-import { AddRecord } from "./components/AddRecord/AddRecord.component";
-import { Header } from "./components/Header/Header.component";
-import { PasswordList } from "./components/PasswordList/PasswordList.component";
+import { AddRecord } from "./component/AddRecord/AddRecord.component";
+import { Header } from "./component/Header/Header.component";
+import { PasswordList } from "./component/PasswordList/PasswordList.component";
 import {Route, Switch, useHistory} from 'react-router-dom'
 
 const App = () => {

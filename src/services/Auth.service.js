@@ -1,4 +1,4 @@
-import api from "../component/http/axios.instanse";
+import api from "../components/http/axios.instanse";
 
 export const AuthService = {
     login: async (data) => api.post('/auth/login', data),

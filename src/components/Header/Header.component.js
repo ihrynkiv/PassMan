@@ -7,7 +7,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 export function Header({ onHomeClick, onAddRecordClick }) {
   return (
-    <AppBar position="static" color="primary" style={{ width: '396px' }} title="PassMan2">
+    <AppBar position="static" color="primary" style={{ width: '396px' }} title="PassMan">
       <Toolbar>
         <IconButton
           size="large"

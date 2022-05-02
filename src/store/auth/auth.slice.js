@@ -7,7 +7,7 @@ export const loginAction = createAsyncThunk(
 )
 
 export const registration = createAsyncThunk(
-  'auth/login',
+  'auth/registration',
   (data) => AuthService.registration(data)
 )
 

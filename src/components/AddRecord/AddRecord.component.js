@@ -32,6 +32,7 @@ export const AddRecord = () => {
         label="Password"
         variant="outlined"
         fullWidth
+        type="password"
         margin="normal"
         styles={STYLES.textField}/>
       <TextField

@@ -2,6 +2,7 @@ import React from 'react'
 import { IconButton, List, ListItem, ListItemText } from "@mui/material";
 import KeyIcon from '@mui/icons-material/Key';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
+import EditIcon from '@mui/icons-material/Edit';
 
 const MOCK_DATA = [
   {
@@ -21,6 +22,10 @@ const MOCK_DATA = [
   },
 ]
 
+const STYLES = {
+  btn: {margin: '0 1px'}
+}
+
 export const PasswordList = () => {
   return (
     <List>
@@ -31,10 +36,13 @@ export const PasswordList = () => {
               key={item.id}
               secondaryAction={
                 <>
-                  <IconButton edge="end" aria-label="Copy username">
+                  <IconButton edge="end" aria-label="Edit" style={STYLES.btn} title="Edit">
+                    <EditIcon/>
+                  </IconButton>
+                  <IconButton edge="end" aria-label="Copy username" style={STYLES.btn}>
                     <ContactMailIcon/>
                   </IconButton>
-                  <IconButton edge="end" aria-label="Copy password">
+                  <IconButton edge="end" aria-label="Copy password" style={STYLES.btn}>
                     <KeyIcon/>
                   </IconButton>
                 </>

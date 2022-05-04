@@ -1,5 +1,5 @@
 import {Alert, Button, IconButton, Snackbar} from "@mui/material";
-import React, {useEffect} from "react";
+import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
 export const Toast = ({message, open, setOpen}) => {

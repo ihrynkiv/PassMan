@@ -6,7 +6,7 @@ export const loginAction = createAsyncThunk(
   (data) => AuthService.login(data)
 )
 
-export const registration = createAsyncThunk(
+export const registrationAction = createAsyncThunk(
   'auth/registration',
   (data) => AuthService.registration(data)
 )
@@ -23,7 +23,7 @@ export const authSlice = createSlice({
       state.isAuth = true
       state.username = action.meta.arg.username
     },
-    [registration.fulfilled]: (state, action ) => {
+    [registrationAction.fulfilled]: (state, action ) => {
       localStorage.setItem('token', action.payload.data)
       state.isAuth = true
       state.username = action.meta.arg.username

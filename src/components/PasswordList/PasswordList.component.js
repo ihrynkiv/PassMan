@@ -1,8 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { IconButton, List, ListItem, ListItemText } from "@mui/material";
 import KeyIcon from '@mui/icons-material/Key';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import EditIcon from '@mui/icons-material/Edit';
+import {useDispatch, useSelector} from "react-redux";
+import {fetchPasswords} from "../../store/passwords/passwords.slice";
+import {getPasswords} from "../../store/passwords/passwords.selector";
+import {useHistory} from "react-router-dom";
 
 const MOCK_DATA = [
   {
@@ -27,10 +31,22 @@ const STYLES = {
 }
 
 export const PasswordList = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  useEffect(() => {
+    dispatch(fetchPasswords()).then(({payload}) => {
+      if(payload?.response?.status === 401) {
+        history.push('/login')
+      }
+    })
+  }, [])
+
+  const passwordList = useSelector(getPasswords)
+
   return (
     <List>
       {
-        MOCK_DATA.map((item) => {
+        passwordList.map((item) => {
           return (
             <ListItem
               key={item.id}

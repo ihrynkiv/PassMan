@@ -1,0 +1,1 @@
+export const getPasswords = (state) => state.passwords

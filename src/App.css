@@ -5,5 +5,22 @@
 
 body {
     width: 396px;
+    height: 500px;
+    position: relative;
+}
+
+#root {
+    height: 500px;
+}
+
+#content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.App {
+    height: 500px;
 }
 

@@ -110,7 +110,7 @@ export const EditRecord = ({configuration, id}) => {
         </div>
         <div>
           <Button variant="contained" endIcon={<SaveIcon/>} style={STYLES.btn} onClick={updateRecordClickHandler}>
-            Save
+            Update
           </Button>
         </div>
       </div>

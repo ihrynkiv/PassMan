@@ -162,7 +162,7 @@ export const Registration = () => {
         value={rePassword}
         styles={STYLES.textField}
         onChange={rePasswordChangeHandler}
-        type={showPassword ? "text" : "password"}
+        type={showRePassword ? "text" : "password"}
         InputProps={{ // <-- This is where the toggle button is added.
           endAdornment: (
             <InputAdornment position="end">
@@ -171,7 +171,7 @@ export const Registration = () => {
                 onClick={handleShowRePassword}
                 onMouseDown={handleShowRePassword}
               >
-                {showPassword ? <Visibility /> : <VisibilityOff />}
+                {showRePassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>
           )

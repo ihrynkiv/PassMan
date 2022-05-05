@@ -26,6 +26,12 @@ export const PasswordList = () => {
 
   const passwordList = useSelector(getPasswords)
 
+  const copyToClipboard = async (fieldName, selectItemId) =>{
+    const entity = passwordList.find(({id}) => id === selectItemId)
+    return await navigator.clipboard.writeText(entity[fieldName])
+  }
+
+
   return (
     <List>
       {
@@ -38,10 +44,22 @@ export const PasswordList = () => {
                   <IconButton edge="end" aria-label="Edit" style={STYLES.btn} title="Edit">
                     <EditIcon/>
                   </IconButton>
-                  <IconButton edge="end" aria-label="Copy username" style={STYLES.btn}>
+                  <IconButton
+                    edge="end"
+                    aria-label="Copy username"
+                    style={STYLES.btn}
+                    title="Copy username"
+                    onClick={() => copyToClipboard('username', item.id)}
+                  >
                     <ContactMailIcon/>
                   </IconButton>
-                  <IconButton edge="end" aria-label="Copy password" style={STYLES.btn}>
+                  <IconButton
+                    edge="end"
+                    aria-label="Copy password"
+                    style={STYLES.btn}
+                    title="Copy password"
+                    onClick={() => copyToClipboard('password', item.id)}
+                  >
                     <KeyIcon/>
                   </IconButton>
                 </>

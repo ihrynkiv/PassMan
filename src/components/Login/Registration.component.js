@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {Button, TextField} from "@mui/material";
+import {Button, IconButton, InputAdornment, TextField} from "@mui/material";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
@@ -7,6 +7,7 @@ import {registrationAction} from "../../store/auth/auth.slice";
 import {Toast} from "../Toast/Toast.component";
 import {fetchUserNames} from "../../store/users/users.slice";
 import {getUserNames} from "../../store/users/users.selector";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 const STYLES = {
   textField: { padding: '8px' },
@@ -104,7 +105,13 @@ export const Registration = () => {
       }
     })
   }
-console.log('error = ', error)
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => setShowPassword(!showPassword);
+
+  const [showRePassword, setShowRePassword] = useState(false);
+  const handleShowRePassword = () => setShowRePassword(!showRePassword);
+
   return (
     <div style={STYLES.mainBlock}>
       <TextField
@@ -125,11 +132,25 @@ console.log('error = ', error)
         error={error.password.hasError}
         helperText={error.password.helperText}
         fullWidth
-        type="password"
         margin="normal"
         value={password}
+        styles={STYLES.textField}
         onChange={passwordChangeHandler}
-        styles={STYLES.textField}/>
+        type={showPassword ? "text" : "password"}
+        InputProps={{ // <-- This is where the toggle button is added.
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleShowPassword}
+                onMouseDown={handleShowPassword}
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
+      />
       <TextField
         id="re-password"
         label="Repeat password"
@@ -137,11 +158,25 @@ console.log('error = ', error)
         error={error.rePassword.hasError}
         helperText={error.rePassword.helperText}
         fullWidth
-        type="password"
         margin="normal"
         value={rePassword}
+        styles={STYLES.textField}
         onChange={rePasswordChangeHandler}
-        styles={STYLES.textField}/>
+        type={showPassword ? "text" : "password"}
+        InputProps={{ // <-- This is where the toggle button is added.
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleShowRePassword}
+                onMouseDown={handleShowRePassword}
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
+      />
       <div style={STYLES.btnBlock}>
         <Button variant="contained" style={STYLES.btn} onClick={registrationClickHandler}>
           Registration

@@ -8,6 +8,7 @@ import {Route, Switch, useHistory} from 'react-router-dom'
 import {Login} from "./components/Login/Login.component";
 import {BasicHeader} from "./components/Header/BasicHeader.component";
 import {Registration} from "./components/Login/Registration.component";
+import {EditRecordView} from "./components/EditRecord/EditRecord.controller";
 
 const App = () => {
   const history = useHistory()
@@ -27,6 +28,7 @@ const App = () => {
           <Route exact path="/login" component={Login}/>
           <Route exact path="/registration" component={Registration}/>
           <Route exact path="/add" component={AddRecord}/>
+          <Route exact path="/edit/:id" component={EditRecordView}/>
         </Switch>
     </div>
   );

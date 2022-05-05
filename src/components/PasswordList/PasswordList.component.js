@@ -31,6 +31,9 @@ export const PasswordList = () => {
     return await navigator.clipboard.writeText(entity[fieldName])
   }
 
+  const editClickHandler = (id) => {
+    history.push(`/edit/${id}`)
+  }
 
   return (
     <List>
@@ -41,7 +44,13 @@ export const PasswordList = () => {
               key={item.id}
               secondaryAction={
                 <>
-                  <IconButton edge="end" aria-label="Edit" style={STYLES.btn} title="Edit">
+                  <IconButton
+                    edge="end"
+                    aria-label="Edit"
+                    style={STYLES.btn}
+                    title="Edit"
+                    onClick={() => editClickHandler(item.id)}
+                  >
                     <EditIcon/>
                   </IconButton>
                   <IconButton

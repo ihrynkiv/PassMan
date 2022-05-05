@@ -12,6 +12,11 @@ export const createPassword = createAsyncThunk(
   (data, thunkAPI) => thunkHandler(passwordsService.createPassword(data), thunkAPI)
 )
 
+export const updatePassword = createAsyncThunk(
+  'passwords/updatePassword',
+  ({data, id}, thunkAPI) => thunkHandler(passwordsService.updatePassword(id, data), thunkAPI)
+)
+
 export const passwordsSlice = createSlice({
   name: 'passwords',
   initialState: {
@@ -19,7 +24,6 @@ export const passwordsSlice = createSlice({
   },
   extraReducers: {
     [fetchPasswords.fulfilled]: (state, {payload} ) => {
-      console.log('payload = ', payload)
       state.data = payload.data
     },
   }

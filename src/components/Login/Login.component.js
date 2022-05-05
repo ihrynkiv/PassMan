@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
-import {Button, TextField} from "@mui/material";
+import {Button, IconButton, InputAdornment, TextField} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {loginAction} from "../../store/auth/auth.slice";
 import {useHistory} from "react-router-dom";
 import {Toast} from "../Toast/Toast.component";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 const STYLES = {
   textField: { padding: '8px' },
@@ -56,6 +57,9 @@ export const Login = () => {
     })
   }
 
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => setShowPassword(!showPassword);
+
   return (
     <div style={STYLES.mainBlock}>
       <TextField
@@ -74,11 +78,25 @@ export const Login = () => {
         label="Password"
         variant="outlined"
         fullWidth
-        type="password"
         margin="normal"
         value={password}
+        styles={STYLES.textField}
         onChange={passwordChangeHandler}
-        styles={STYLES.textField}/>
+        type={showPassword ? "text" : "password"}
+        InputProps={{ // <-- This is where the toggle button is added.
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleShowPassword}
+                onMouseDown={handleShowPassword}
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
+      />
       <div style={STYLES.btnBlock}>
         <Button variant="contained" style={STYLES.btn} onClick={loginClickHandler}>
           Login

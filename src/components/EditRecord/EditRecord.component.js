@@ -4,7 +4,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {createPassword} from "../../store/passwords/passwords.slice";
+import {updatePassword} from "../../store/passwords/passwords.slice";
 import {Toast} from "../Toast/Toast.component";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 
@@ -14,13 +14,16 @@ const STYLES = {
   mainBlock: { margin: '5px' }
 }
 
-export const AddRecord = () => {
-  const [name, setName] = useState('')
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [url, setUrl] = useState('')
+export const EditRecord = ({configuration, id}) => {
+  const [name, setName] = useState(configuration.name)
+  const [username, setUsername] = useState(configuration.username)
+  const [password, setPassword] = useState(configuration.password)
+  const [url, setUrl] = useState(configuration.url)
   const [open, setOpen] = useState(false)
-  const [message, setMessage] = useState('Record was successfully added')
+  const [message, setMessage] = useState('Record was successfully updated')
+
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => setShowPassword(!showPassword);
 
   const history = useHistory()
   const dispatch = useDispatch()
@@ -29,23 +32,20 @@ export const AddRecord = () => {
     history.push('/')
   }
 
-  const addRecordClickHandler = () => {
-    dispatch(createPassword({name, username, password, url}))
+  const updateRecordClickHandler = () => {
+    dispatch(updatePassword({data: {name, username, password, url, id}, id: id}))
       .then((res) => {
-      if(!res.error) {
-        setOpen(true)
-        history.push('/')
-      } else if(res.payload?.response?.status === 401) {
-        history.push('/login')
-      } else if (res.error) {
-        setMessage(res.payload?.message)
-        setOpen(true)
-      }
-    })
+        if(!res.error) {
+          setOpen(true)
+          history.push('/')
+        } else if(res.payload?.response?.status === 401) {
+          history.push('/login')
+        } else if (res.error) {
+          setMessage(res.payload?.message)
+          setOpen(true)
+        }
+      })
   }
-
-  const [showPassword, setShowPassword] = useState(false);
-  const handleShowPassword = () => setShowPassword(!showPassword);
 
   return (
     <div style={STYLES.mainBlock}>
@@ -75,9 +75,9 @@ export const AddRecord = () => {
         fullWidth
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        type={showPassword ? "text" : "password"}
         margin="normal"
         styles={STYLES.textField}
-        type={showPassword ? "text" : "password"}
         InputProps={{ // <-- This is where the toggle button is added.
           endAdornment: (
             <InputAdornment position="end">
@@ -109,7 +109,7 @@ export const AddRecord = () => {
           </Button>
         </div>
         <div>
-          <Button variant="contained" endIcon={<SaveIcon/>} style={STYLES.btn} onClick={addRecordClickHandler}>
+          <Button variant="contained" endIcon={<SaveIcon/>} style={STYLES.btn} onClick={updateRecordClickHandler}>
             Save
           </Button>
         </div>

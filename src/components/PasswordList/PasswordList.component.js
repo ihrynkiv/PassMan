@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { IconButton, List, ListItem, ListItemText } from "@mui/material";
 import KeyIcon from '@mui/icons-material/Key';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
@@ -7,14 +7,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchPasswords} from "../../store/passwords/passwords.slice";
 import {getPasswords} from "../../store/passwords/passwords.selector";
 import {useHistory} from "react-router-dom";
+import {Toast} from "../Toast/Toast.component";
+import {NoItems} from "../NoItems/NoItems.component";
 
 const STYLES = {
   btn: {margin: '0 1px'}
 }
 
 export const PasswordList = () => {
+  const [open, setOpen] = useState(false)
   const dispatch = useDispatch();
   const history = useHistory();
+
   useEffect(() => {
     dispatch(fetchPasswords())
       .then(({payload}) => {
@@ -24,10 +28,11 @@ export const PasswordList = () => {
     })
   }, [])
 
-  const passwordList = useSelector(getPasswords)
+  const passwordList = useSelector(getPasswords) || []
 
   const copyToClipboard = async (fieldName, selectItemId) =>{
     const entity = passwordList.find(({id}) => id === selectItemId)
+    setOpen(true)
     return await navigator.clipboard.writeText(entity[fieldName])
   }
 
@@ -38,7 +43,7 @@ export const PasswordList = () => {
   return (
     <List>
       {
-        passwordList.map((item) => {
+        passwordList.length ? passwordList.map((item) => {
           return (
             <ListItem
               key={item.id}
@@ -80,8 +85,9 @@ export const PasswordList = () => {
               />
             </ListItem>
           )
-        })
+        }) : <NoItems/>
       }
+      <Toast severity="success" message="Copied successfully" setOpen={setOpen} open={open}/>
     </List>
   )
 }

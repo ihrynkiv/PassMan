@@ -2,7 +2,7 @@ import {Alert, Button, IconButton, Snackbar} from "@mui/material";
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
-export const Toast = ({message, open, setOpen}) => {
+export const Toast = ({message, open, setOpen, severity = "error"}) => {
   const handleClose = () => setOpen(false)
 
   const action = (
@@ -29,7 +29,7 @@ export const Toast = ({message, open, setOpen}) => {
       onClose={handleClose}
       action={action}
     >
-      <Alert onClose={handleClose} severity="error">{message}</Alert>
+      <Alert onClose={handleClose} severity={severity}>{message}</Alert>
     </Snackbar>
   )
 }

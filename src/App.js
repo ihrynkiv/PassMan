@@ -24,11 +24,12 @@ const App = () => {
         />
       </Switch>
         <Switch>
-          <Route exact path="/" component={PasswordList}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/registration" component={Registration}/>
           <Route exact path="/add" component={AddRecord}/>
           <Route exact path="/edit/:id" component={EditRecordView}/>
+          <Route exact path="/" component={PasswordList}/>
+          <Route exact path="" component={PasswordList}/>
         </Switch>
     </div>
   );

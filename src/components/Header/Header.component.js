@@ -5,7 +5,7 @@ import React from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
-export function Header({ onHomeClick, onAddRecordClick }) {
+export const Header = ({ onHomeClick, onAddRecordClick }) => {
   return (
     <AppBar position="static" color="primary" style={{ width: '396px' }} title="PassMan">
       <Toolbar>

@@ -8,24 +8,6 @@ import {fetchPasswords} from "../../store/passwords/passwords.slice";
 import {getPasswords} from "../../store/passwords/passwords.selector";
 import {useHistory} from "react-router-dom";
 
-const MOCK_DATA = [
-  {
-    id: 1,
-    name: 'Google',
-    url: 'google.com',
-  },
-  {
-    id: 2,
-    name: 'Reddit',
-    url: 'reddit.com',
-  },
-  {
-    id: 3,
-    name: 'Facebook',
-    url: 'facebook.com',
-  },
-]
-
 const STYLES = {
   btn: {margin: '0 1px'}
 }
@@ -34,7 +16,8 @@ export const PasswordList = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {
-    dispatch(fetchPasswords()).then(({payload}) => {
+    dispatch(fetchPasswords())
+      .then(({payload}) => {
       if(payload?.response?.status === 401) {
         history.push('/login')
       }

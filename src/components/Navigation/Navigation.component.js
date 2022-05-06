@@ -1,4 +1,4 @@
-import {BottomNavigation, BottomNavigationAction} from "@mui/material";
+import {BottomNavigation, BottomNavigationAction, useTheme} from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -9,6 +9,8 @@ export const Navigation = () => {
   const [value, setValue] = React.useState(0);
 
   const history = useHistory()
+  const theme = useTheme()
+  const isDarkMode = theme.palette.mode === 'dark'
 
   const navigationHandle = (url) => history.push(url)
 
@@ -16,7 +18,7 @@ export const Navigation = () => {
       <BottomNavigation
         showLabels
         value={value}
-        style={{backgroundColor: '#e0e0e0'}}
+        style={{backgroundColor: isDarkMode ? '#1c1b1b' : '#e0e0e0'}}
         onChange={(event, newValue) => {
           setValue(newValue);
         }}

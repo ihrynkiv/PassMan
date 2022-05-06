@@ -13,11 +13,25 @@ import {NoopComponent} from "./components/Noop/Noop.component";
 import {Navigation} from "./components/Navigation/Navigation.component";
 import {Generator} from "./components/Generator/Generator.component";
 import {Settings} from "./components/Settings/Settings.component";
+import {useTheme} from "@mui/material";
+import {ThemeProvider, createTheme} from "@mui/material/styles";
+
+export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+
+const STYLES = {
+  DARK_THEME: {
+    backgroundColor: '#1e1e1e',
+    color: '#eeeeee'
+  }
+}
 
 const App = () => {
   const history = useHistory()
+  const theme = useTheme()
+  const isDarkMode = theme.palette.mode === 'dark'
+  const styles = isDarkMode ? STYLES.DARK_THEME : {}
   return (
-    <div className='App'>
+    <div className='App' style={styles}>
       <Switch>
         <Route exact path="/login" component={BasicHeader} />
         <Route exact path="/registration" component={BasicHeader} />
@@ -28,7 +42,7 @@ const App = () => {
         />
       </Switch>
 
-      <div id="content">
+      <div id="content" style={styles}>
         <Switch>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/registration" component={Registration}/>
@@ -50,4 +64,32 @@ const App = () => {
   );
 }
 
-export default withCookies(App);
+export default function ToggleColorMode() {
+  const [mode, setMode] = React.useState('light');
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    [],
+  );
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode],
+  );
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <App/>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}

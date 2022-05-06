@@ -16,6 +16,7 @@ export const Navigation = () => {
       <BottomNavigation
         showLabels
         value={value}
+        style={{backgroundColor: '#e0e0e0'}}
         onChange={(event, newValue) => {
           setValue(newValue);
         }}

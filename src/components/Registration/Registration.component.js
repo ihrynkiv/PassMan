@@ -98,7 +98,7 @@ export const Registration = () => {
     const user = {username, password}
     dispatch(registrationAction(user)).then((res) => {
       if (res.error) {
-         setMessage(res.error.message || defaultErrorMessage)
+        setMessage(res.error.message || defaultErrorMessage)
         setOpen(true)
       } else {
         history.push('/')
@@ -181,7 +181,7 @@ export const Registration = () => {
         <Button variant="contained" style={STYLES.btn} onClick={registrationClickHandler}>
           Registration
         </Button>
-        <Button href="/login">Login</Button>
+        <Button onClick={() => history.push('/login')}>Login</Button>
       </div>
       <Toast message={message} open={open} setOpen={setOpen}/>
     </div>

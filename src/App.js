@@ -7,7 +7,7 @@ import { PasswordList } from "./components/PasswordList/PasswordList.component";
 import {Route, Switch, useHistory} from 'react-router-dom'
 import {Login} from "./components/Login/Login.component";
 import {BasicHeader} from "./components/Header/BasicHeader.component";
-import {Registration} from "./components/Login/Registration.component";
+import {Registration} from "./components/Registration/Registration.component";
 import {EditRecordView} from "./components/EditRecord/EditRecord.controller";
 import {NoopComponent} from "./components/Noop/Noop.component";
 import {Navigation} from "./components/Navigation/Navigation.component";

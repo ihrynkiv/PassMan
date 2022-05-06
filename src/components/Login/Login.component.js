@@ -101,7 +101,7 @@ export const Login = () => {
         <Button variant="contained" style={STYLES.btn} onClick={loginClickHandler}>
           Login
         </Button>
-        <Button href="/registration">Registration</Button>
+        <Button onClick={() => history.push("/registration")}>Registration</Button>
       </div>
       <Toast message="Wrong username or password" open={open} setOpen={setOpen}/>
     </div>

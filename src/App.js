@@ -14,6 +14,7 @@ import {Generator} from "./components/Generator/Generator.component";
 import {Settings} from "./components/Settings/Settings.component";
 import {useTheme} from "@mui/material";
 import {ThemeProvider, createTheme} from "@mui/material/styles";
+import {SearchHeader} from "./components/Header/SearchHeader.component";
 
 export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -26,14 +27,22 @@ const STYLES = {
 
 const App = () => {
   const history = useHistory()
+  history.push('/')
+
   const theme = useTheme()
   const isDarkMode = theme.palette.mode === 'dark'
   const styles = isDarkMode ? STYLES.DARK_THEME : {}
+
   return (
     <div className='App' style={styles}>
       <Switch>
         <Route exact path="/login" component={BasicHeader} />
         <Route exact path="/registration" component={BasicHeader} />
+        <Route exact path="/" render={() =>
+         <SearchHeader
+           onHomeClick={() => history.push('/')}
+           onAddRecordClick={() => history.push('/add')}/>}
+        />
         <Route path="/" render={() =>
           <Header
             onHomeClick={() => history.push('/')}
@@ -50,7 +59,6 @@ const App = () => {
           <Route exact path="/generator" component={Generator}/>
           <Route exact path="/settings" component={Settings}/>
           <Route exact path="/" component={PasswordList}/>
-          <Route exact path="" component={PasswordList}/>
         </Switch>
 
         <Switch>

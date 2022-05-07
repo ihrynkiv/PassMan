@@ -9,6 +9,7 @@ import {getPasswords} from "../../store/passwords/passwords.selector";
 import {useHistory} from "react-router-dom";
 import {Toast} from "../Toast/Toast.component";
 import {NoItems} from "../NoItems/NoItems.component";
+import {useQuery} from "../../hooks/useQuery.hook";
 
 const STYLES = {
   btn: {margin: '0 1px'}
@@ -18,6 +19,7 @@ export const PasswordList = () => {
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch();
   const history = useHistory();
+  const query = useQuery();
 
   useEffect(() => {
     dispatch(fetchPasswords())
@@ -29,6 +31,24 @@ export const PasswordList = () => {
   }, [])
 
   const passwordList = useSelector(getPasswords) || []
+  const [filteredPasswordList, setFilteredPasswordList] = useState(passwordList)
+  const search = query.get('search')
+
+  useEffect(() => {
+    if(!search) {
+      setFilteredPasswordList(passwordList)
+    } else {
+      const filteredItems = passwordList.filter(item => {
+        const matchWithUrl = item.url.toLowerCase().includes(search.toLowerCase())
+        const matchWithName = item.name.toLowerCase().includes(search.toLowerCase())
+        const matchWithUsername = item.username.toLowerCase().includes(search.toLowerCase())
+
+        return matchWithUrl || matchWithName || matchWithUsername
+      })
+      setFilteredPasswordList(filteredItems)
+    }
+
+  }, [passwordList, search])
 
   const copyToClipboard = async (fieldName, selectItemId) =>{
     const entity = passwordList.find(({id}) => id === selectItemId)
@@ -43,7 +63,7 @@ export const PasswordList = () => {
   return (
     <List>
       {
-        passwordList.length ? passwordList.map((item) => {
+        filteredPasswordList.length ? filteredPasswordList.map((item) => {
           return (
             <ListItem
               key={item.id}

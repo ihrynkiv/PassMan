@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {passwordsService} from "../../services/Passwords.service";
 import {thunkHandler} from "../thunkHandler";
+import {getDecryptedPassword} from "../../utils/passwords.utils";
 
 export const fetchPasswords = createAsyncThunk(
   'passwords/fetchPasswords',
@@ -24,7 +25,10 @@ export const passwordsSlice = createSlice({
   },
   extraReducers: {
     [fetchPasswords.fulfilled]: (state, {payload} ) => {
-      state.data = payload.data
+      state.data = payload.data.map(passwordEntity => {
+        const encryptedPassword = getDecryptedPassword(passwordEntity.password)
+        return {...passwordEntity, password: encryptedPassword}
+      })
     },
   }
 })

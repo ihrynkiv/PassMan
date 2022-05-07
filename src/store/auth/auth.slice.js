@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {AuthService} from "../../services/Auth.service";
+import {UsersService} from "../../services/UsersService";
 
 export const loginAction = createAsyncThunk(
   'auth/login',
@@ -11,6 +12,11 @@ export const registrationAction = createAsyncThunk(
   (data) => AuthService.registration(data)
 )
 
+export const whoAmIAction = createAsyncThunk(
+  'auth/whoAmI',
+  () => UsersService.whoAmI()
+)
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
@@ -18,15 +24,22 @@ export const authSlice = createSlice({
     isAuth: false
   },
   extraReducers: {
-    [loginAction.fulfilled]: (state, action ) => {
-      localStorage.setItem('token', action.payload.data)
+    [loginAction.fulfilled]: (state, {meta, payload} ) => {
+      localStorage.setItem('token', payload.data)
+      localStorage.setItem('username', payload.data.username)
       state.isAuth = true
-      state.username = action.meta.arg.username
+      state.username = meta.arg.username
     },
-    [registrationAction.fulfilled]: (state, action ) => {
-      localStorage.setItem('token', action.payload.data)
+    [registrationAction.fulfilled]: (state, {meta, payload} ) => {
+      localStorage.setItem('token', payload.data)
+      localStorage.setItem('username', payload.data.username)
       state.isAuth = true
-      state.username = action.meta.arg.username
+      state.username = meta.arg.username
+    },
+    [whoAmIAction.fulfilled]: (state, {payload}) => {
+      localStorage.setItem('username', payload.data.username)
+      state.isAuth = true
+      state.username = payload.data.username
     }
   }
 })

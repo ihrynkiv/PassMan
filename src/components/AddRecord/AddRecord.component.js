@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Button, IconButton, InputAdornment, TextField} from "@mui/material";
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import {createPassword} from "../../store/passwords/passwords.slice";
 import {Toast} from "../Toast/Toast.component";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+import {whoAmIAction} from "../../store/auth/auth.slice";
 
 const STYLES = {
   textField: { padding: '8px' },
@@ -15,15 +16,19 @@ const STYLES = {
 }
 
 export const AddRecord = () => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  useEffect(() => {
+    dispatch(whoAmIAction())
+  }, [])
+
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [url, setUrl] = useState('')
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState('Record was successfully added')
-
-  const history = useHistory()
-  const dispatch = useDispatch()
 
   const cancelClickHandler = () => {
     history.push('/')
@@ -104,12 +109,22 @@ export const AddRecord = () => {
       />
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <div>
-          <Button variant="contained" endIcon={<CancelIcon/>} style={STYLES.btn} onClick={cancelClickHandler}>
+          <Button color="secondary"
+                  variant="contained"
+                  endIcon={<CancelIcon/>}
+                  style={STYLES.btn}
+                  onClick={cancelClickHandler}
+          >
             Cancel
           </Button>
         </div>
         <div>
-          <Button variant="contained" endIcon={<SaveIcon/>} style={STYLES.btn} onClick={addRecordClickHandler}>
+          <Button
+            variant="contained"
+            endIcon={<SaveIcon/>}
+            style={STYLES.btn}
+            onClick={addRecordClickHandler}
+          >
             Save
           </Button>
         </div>

@@ -14,7 +14,7 @@ export const Settings = () => {
   const history = useHistory()
 
   const logoutHandler = () => {
-    window.localStorage.removeItem('token')
+    window.localStorage.clear()
     history.push('/login')
   }
 
@@ -74,8 +74,8 @@ export const Settings = () => {
         }}
       >
         Logout
-        <IconButton sx={{ ml: 1 }} color="inherit">
-          <LogoutIcon onClick={logoutHandler}/>
+        <IconButton sx={{ ml: 1 }} color="inherit" onClick={logoutHandler}>
+          <LogoutIcon/>
         </IconButton>
       </Box>
     </Box>

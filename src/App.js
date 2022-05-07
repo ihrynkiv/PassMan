@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import { withCookies } from 'react-cookie';
 import { AddRecord } from "./components/AddRecord/AddRecord.component";
 import { Header } from "./components/Header/Header.component";
 import { PasswordList } from "./components/PasswordList/PasswordList.component";

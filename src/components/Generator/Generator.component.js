@@ -1,10 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import IconButton from "@mui/material/IconButton";
-import {Box, Checkbox, FormControl, FormControlLabel, Slider} from "@mui/material";
+import {Box, Button, Checkbox, FormControl, FormControlLabel, Slider} from "@mui/material";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 import { FormGroup } from '@mui/material';
 import {Toast} from "../Toast/Toast.component";
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import {useHistory} from "react-router-dom";
 
 const LOWER_CASE_LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 const CAPITAL_CASE_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -62,8 +64,19 @@ export const Generator = () => {
     return await navigator.clipboard.writeText(randomizedPassword)
   }
 
+  const history = useHistory()
+
+  const quickCreateHandle = async () => {
+    window.localStorage.setItem('randomizedPassword', randomizedPassword)
+    await navigator.clipboard.writeText(randomizedPassword)
+    history.push('/add')
+  }
+
   return (
-    <>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
     <Box
       sx={{
         display: 'flex',
@@ -104,6 +117,7 @@ export const Generator = () => {
           p: 3,
         }}
       >
+        <div>
         <FormGroup>
           <FormControl style={{width: '250px', display: 'flex', flexDirection: 'row', marginBottom: '15px'}}>
             <span style={{margin: '5px', marginRight: '25px'}}>Length: </span>
@@ -129,8 +143,30 @@ export const Generator = () => {
             <Checkbox checked={hasSymbols} onChange={symbolsChangeHandler}/>
           } label="!@#$%^&*" />
         </FormGroup>
+        </div>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          width: '100%',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          color: 'text.primary',
+          borderRadius: 1,
+          margin: '15px',
+          p: 3,
+        }}
+      >
+        <Button
+          variant="contained"
+          style={{marginRight: '30px'}}
+          onClick={quickCreateHandle}
+          endIcon={<AddBoxIcon/>}
+        >
+          Quick Create
+        </Button>
       </Box>
       <Toast severity="success" message="Copied successfully" setOpen={setOpen} open={open}/>
-    </>
+    </div>
   )
 }

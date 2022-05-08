@@ -1,13 +1,23 @@
-/*global chrome*/
 import {BottomNavigation, BottomNavigationAction, useTheme} from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 import SettingsIcon from '@mui/icons-material/Settings';
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {useHistory} from "react-router-dom";
+import FolderIcon from '@mui/icons-material/Folder';
+
+const TAB_ID_BY_PATH = {
+  tab: 0,
+  vault: 1,
+  generator: 2,
+  settings: 3,
+  'index.html': 0,
+}
 
 export const Navigation = () => {
-  const [value, setValue] = React.useState(0);
+  const path = window.location.pathname.replace('/', '')
+
+  const [value, setValue] = useState(TAB_ID_BY_PATH[path] || 0)
 
   const history = useHistory()
   const theme = useTheme()
@@ -15,9 +25,12 @@ export const Navigation = () => {
 
   const navigationHandle = (url) => history.push(url)
 
-  // chrome.tabs.query({currentWindow: true, active: true}, async function (tabs) {
-  //   console.log(tabs[0].url)
-  // });
+  useEffect(() => {
+    const tabId = TAB_ID_BY_PATH[path]
+    if (tabId !== undefined) {
+      setValue(tabId)
+    }
+  }, [path])
 
   return (
       <BottomNavigation
@@ -28,7 +41,8 @@ export const Navigation = () => {
           setValue(newValue);
         }}
       >
-        <BottomNavigationAction label="My Vault" icon={<LockIcon />} onClick={() => navigationHandle('/')}/>
+        <BottomNavigationAction label="Tab" icon={<FolderIcon />} onClick={() => navigationHandle('/tab')}/>
+        <BottomNavigationAction label="My Vault" icon={<LockIcon />} onClick={() => navigationHandle('/vault')}/>
         <BottomNavigationAction label="Generator" icon={<ShuffleIcon />} onClick={() => navigationHandle('/generator')}/>
         <BottomNavigationAction label="Settings" icon={<SettingsIcon />} onClick={() => navigationHandle('/settings')}/>
       </BottomNavigation>

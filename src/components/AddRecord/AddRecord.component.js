@@ -1,3 +1,4 @@
+/*global chrome*/
 import React, {useEffect, useState} from 'react'
 import {Button, IconButton, InputAdornment, TextField} from "@mui/material";
 import SaveIcon from '@mui/icons-material/Save';
@@ -25,13 +26,28 @@ export const AddRecord = () => {
 
   const [name, setName] = useState('')
   const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState(window.localStorage.getItem('randomizedPassword') || '')
   const [url, setUrl] = useState('')
   const [open, setOpen] = useState(false)
   const [message, setMessage] = useState('Record was successfully added')
 
+  useEffect(() => {
+    chrome.tabs.query({currentWindow: true, active: true}, async function (tabs) {
+      const url = new URL(tabs[0].url)
+      if (url.protocol.startsWith('http')) {
+        setUrl(url.origin)
+        const [name] = url.hostname.split('.').slice(-2)
+        const upperName = name.charAt(0).toUpperCase() + name.slice(1)
+        setName(upperName)
+      }
+
+    });
+  }, [])
+
+  useEffect(() => window.localStorage.removeItem('randomizedPassword'), [])
+
   const cancelClickHandler = () => {
-    history.push('/')
+    history.goBack()
   }
 
   const addRecordClickHandler = () => {
@@ -39,7 +55,7 @@ export const AddRecord = () => {
       .then((res) => {
       if(!res.error) {
         setOpen(true)
-        history.push('/')
+        history.goBack()
       } else if(res.payload?.response?.status === 401) {
         history.push('/login')
       } else if (res.error) {

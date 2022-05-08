@@ -15,6 +15,7 @@ import {Settings} from "./components/Settings/Settings.component";
 import {useTheme} from "@mui/material";
 import {ThemeProvider, createTheme} from "@mui/material/styles";
 import {SearchHeader} from "./components/Header/SearchHeader.component";
+import {ActiveTab} from "./components/PasswordList/ActiveTab.component";
 
 export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -37,19 +38,14 @@ const App = () => {
       <Switch>
         <Route exact path="/login" component={BasicHeader} />
         <Route exact path="/registration" component={BasicHeader} />
-        <Route exact path="/" render={() =>
+        <Route exact path="/vault" render={() =>
          <SearchHeader
-           onHomeClick={() => history.push('/')}
+           onHomeClick={() => history.push('/tab')}
            onAddRecordClick={() => history.push('/add')}/>}
-        />
-        <Route exact path="/index.html" render={() =>
-          <SearchHeader
-            onHomeClick={() => history.push('/')}
-            onAddRecordClick={() => history.push('/add')}/>}
         />
         <Route path="/" render={() =>
           <Header
-            onHomeClick={() => history.push('/')}
+            onHomeClick={() => history.push('/tab')}
             onAddRecordClick={() => history.push('/add')}/>}
         />
       </Switch>
@@ -62,8 +58,9 @@ const App = () => {
           <Route exact path="/edit/:id" component={EditRecordView}/>
           <Route exact path="/generator" component={Generator}/>
           <Route exact path="/settings" component={Settings}/>
-          <Route exact path="/" component={PasswordList}/>
-          <Route exact path="/index.html" component={PasswordList}/>
+          <Route exact path="/vault" component={PasswordList}/>
+          <Route exact path="/tab" component={ActiveTab}/>
+          <Route exact path="/index.html" component={ActiveTab}/>
         </Switch>
 
         <Switch>

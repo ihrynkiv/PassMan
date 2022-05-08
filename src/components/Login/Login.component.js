@@ -52,7 +52,7 @@ export const Login = () => {
       if (res.error) {
         setOpen(true)
       } else {
-        history.push('/')
+        history.push('/vault')
       }
     })
   }

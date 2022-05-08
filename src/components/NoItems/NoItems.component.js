@@ -16,18 +16,19 @@ const STYLES = {
   }
 }
 
-export const NoItems = () => {
+export const NoItems = ({message = 'There are no Items'}) => {
   const history = useHistory()
   const handleCreate = () => history.push('/add')
 
   return (
     <div style={STYLES.wrapper}>
       <Typography
-        variant="h5"
+        variant="h6"
         gutterBottom
         component="div"
+        textAlign="center"
       >
-        There is no Items
+        {message}
       </Typography>
       <Button
         variant="contained"

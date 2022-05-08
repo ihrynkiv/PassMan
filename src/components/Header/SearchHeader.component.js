@@ -58,7 +58,7 @@ export const SearchHeader = ({ onHomeClick, onAddRecordClick }) => {
   const searchChangeHandler = (e) => {
     setSearchQuery(e.target.value)
     history.push({
-      pathname: '/',
+      pathname: '/vault',
       search: `?search=${e.target.value}`
     })
   }

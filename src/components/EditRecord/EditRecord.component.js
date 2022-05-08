@@ -36,14 +36,14 @@ export const EditRecord = ({configuration, id}) => {
   }, [])
 
   const cancelClickHandler = () => {
-    history.push('/')
+    history.goBack()
   }
 
   const deleteClickHandler = () => {
     dispatch(deletePassword({id})).then((res) => {
       if(!res.error) {
         setOpen(true)
-        history.push('/')
+        history.goBack()
       } else if(res.payload?.response?.status === 401) {
         history.push('/login')
       } else if (res.error) {
@@ -51,7 +51,7 @@ export const EditRecord = ({configuration, id}) => {
         setOpen(true)
       }
     })
-    history.push('/')
+    history.goBack()
   }
 
   const updateRecordClickHandler = () => {
@@ -59,7 +59,7 @@ export const EditRecord = ({configuration, id}) => {
       .then((res) => {
         if(!res.error) {
           setOpen(true)
-          history.push('/')
+          history.goBack()
         } else if(res.payload?.response?.status === 401) {
           history.push('/login')
         } else if (res.error) {

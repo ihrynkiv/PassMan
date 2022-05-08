@@ -101,7 +101,7 @@ export const Registration = () => {
         setMessage(res.error.message || defaultErrorMessage)
         setOpen(true)
       } else {
-        history.push('/')
+        history.push('/vault')
       }
     })
   }

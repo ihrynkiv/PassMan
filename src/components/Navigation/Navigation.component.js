@@ -1,10 +1,10 @@
 import {BottomNavigation, BottomNavigationAction, useTheme} from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
-import ShuffleIcon from '@mui/icons-material/Shuffle';
 import SettingsIcon from '@mui/icons-material/Settings';
 import React, {useEffect, useState} from 'react'
 import {useHistory} from "react-router-dom";
 import FolderIcon from '@mui/icons-material/Folder';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 const TAB_ID_BY_PATH = {
   tab: 0,
@@ -43,7 +43,7 @@ export const Navigation = () => {
       >
         <BottomNavigationAction label="Tab" icon={<FolderIcon />} onClick={() => navigationHandle('/tab')}/>
         <BottomNavigationAction label="My Vault" icon={<LockIcon />} onClick={() => navigationHandle('/vault')}/>
-        <BottomNavigationAction label="Generator" icon={<ShuffleIcon />} onClick={() => navigationHandle('/generator')}/>
+        <BottomNavigationAction label="Generator" icon={<AutorenewIcon />} onClick={() => navigationHandle('/generator')}/>
         <BottomNavigationAction label="Settings" icon={<SettingsIcon />} onClick={() => navigationHandle('/settings')}/>
       </BottomNavigation>
   );

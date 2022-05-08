@@ -2,11 +2,11 @@ import React, {useCallback, useEffect, useState} from 'react'
 import IconButton from "@mui/material/IconButton";
 import {Box, Button, Checkbox, FormControl, FormControlLabel, Slider} from "@mui/material";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import ShuffleIcon from '@mui/icons-material/Shuffle';
 import { FormGroup } from '@mui/material';
 import {Toast} from "../Toast/Toast.component";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import {useHistory} from "react-router-dom";
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 const LOWER_CASE_LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 const CAPITAL_CASE_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -101,7 +101,7 @@ export const Generator = () => {
           <ContentCopyIcon/>
         </IconButton>
         <IconButton sx={{ ml: 1 }} color="inherit" onClick={generatePassword}>
-          <ShuffleIcon/>
+          <AutorenewIcon/>
         </IconButton>
       </div>
     </Box>
@@ -153,8 +153,7 @@ export const Generator = () => {
           justifyContent: 'flex-end',
           color: 'text.primary',
           borderRadius: 1,
-          margin: '15px',
-          p: 3,
+          p: 0,
         }}
       >
         <Button

@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {AuthService} from "../../services/Auth.service";
 import {UsersService} from "../../services/UsersService";
+import {thunkHandler} from "../thunkHandler";
 
 export const loginAction = createAsyncThunk(
   'auth/login',
@@ -15,6 +16,11 @@ export const registrationAction = createAsyncThunk(
 export const whoAmIAction = createAsyncThunk(
   'auth/whoAmI',
   () => UsersService.whoAmI()
+)
+
+export const updatePasswordAction = createAsyncThunk(
+  'auth/updatePassword',
+  (data, ThunkAPI) => thunkHandler(AuthService.update(data), ThunkAPI)
 )
 
 export const authSlice = createSlice({

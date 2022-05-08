@@ -2,7 +2,7 @@ import {Alert, Button, IconButton, Snackbar} from "@mui/material";
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
-export const Toast = ({message, open, setOpen, severity = "error"}) => {
+export const Toast = ({message, open, setOpen, severity = "info"}) => {
   const handleClose = () => setOpen(false)
 
   const action = (

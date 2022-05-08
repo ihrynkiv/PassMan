@@ -57,7 +57,7 @@ export const Settings = () => {
         }}
       >
         Update user info
-        <IconButton sx={{ ml: 1 }} color="inherit">
+        <IconButton sx={{ ml: 1 }} color="inherit" onClick={() => history.push('/update-user-info')}>
           <AccountCircleIcon />
         </IconButton>
       </Box>

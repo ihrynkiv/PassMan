@@ -10,6 +10,8 @@ import {Visibility, VisibilityOff} from "@mui/icons-material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import {useEffect} from "react";
 import {whoAmIAction} from "../../store/auth/auth.slice";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import {SYMBOLS} from "../../constants/vars";
 
 const STYLES = {
   textField: { padding: '8px' },
@@ -69,6 +71,23 @@ export const EditRecord = ({configuration, id}) => {
       })
   }
 
+  const generatePasswordHandler = async () => {
+    const symbolsCount = 16
+    const symbols = SYMBOLS.split('')
+    const res = []
+
+    for (let i = 0; i < symbolsCount; i++) {
+      const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)]
+      res.push(randomSymbol)
+    }
+
+    setOpen(true)
+    const generatedPassword = res.join('')
+    await navigator.clipboard.writeText(generatedPassword)
+    setMessage('Password was copied to clipboard')
+    setPassword(generatedPassword)
+  }
+
   return (
     <div style={STYLES.mainBlock}>
       <TextField
@@ -109,6 +128,12 @@ export const EditRecord = ({configuration, id}) => {
                 onMouseDown={handleShowPassword}
               >
                 {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+              <IconButton
+                aria-label="generate password and copy"
+                onClick={generatePasswordHandler}
+              >
+                <AutorenewIcon/>
               </IconButton>
             </InputAdornment>
           )

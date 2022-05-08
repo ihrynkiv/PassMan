@@ -16,6 +16,7 @@ import {useTheme} from "@mui/material";
 import {ThemeProvider, createTheme} from "@mui/material/styles";
 import {SearchHeader} from "./components/Header/SearchHeader.component";
 import {ActiveTab} from "./components/PasswordList/ActiveTab.component";
+import {UpdateUserInfo} from "./components/UpdateUserInfo/UpdateUserInfo.component";
 
 export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -59,6 +60,7 @@ const App = () => {
           <Route exact path="/generator" component={Generator}/>
           <Route exact path="/settings" component={Settings}/>
           <Route exact path="/vault" component={PasswordList}/>
+          <Route exact path="/update-user-info" component={UpdateUserInfo}/>
           <Route exact path="/tab" component={ActiveTab}/>
           <Route exact path="/index.html" component={ActiveTab}/>
         </Switch>

@@ -9,6 +9,8 @@ import {createPassword} from "../../store/passwords/passwords.slice";
 import {Toast} from "../Toast/Toast.component";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {whoAmIAction} from "../../store/auth/auth.slice";
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import {SYMBOLS} from "../../constants/vars";
 
 const STYLES = {
   textField: { padding: '8px' },
@@ -68,6 +70,22 @@ export const AddRecord = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
 
+  const generatePasswordHandler = async () => {
+    const symbolsCount = 16
+    const symbols = SYMBOLS.split('')
+    const res = []
+
+    for (let i = 0; i < symbolsCount; i++) {
+      const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)]
+      res.push(randomSymbol)
+    }
+    const generatedPassword = res.join('')
+    setOpen(true)
+    await navigator.clipboard.writeText(generatedPassword)
+    setMessage('Password was copied to clipboard')
+    setPassword(generatedPassword)
+  }
+
   return (
     <div style={STYLES.mainBlock}>
       <TextField
@@ -108,6 +126,12 @@ export const AddRecord = () => {
                 onMouseDown={handleShowPassword}
               >
                 {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+              <IconButton
+                aria-label="generate password and copy"
+                onClick={generatePasswordHandler}
+              >
+                <AutorenewIcon/>
               </IconButton>
             </InputAdornment>
           )

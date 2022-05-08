@@ -1,3 +1,4 @@
+/*global chrome*/
 import {BottomNavigation, BottomNavigationAction, useTheme} from "@mui/material";
 import LockIcon from '@mui/icons-material/Lock';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
@@ -13,6 +14,10 @@ export const Navigation = () => {
   const isDarkMode = theme.palette.mode === 'dark'
 
   const navigationHandle = (url) => history.push(url)
+
+  // chrome.tabs.query({currentWindow: true, active: true}, async function (tabs) {
+  //   console.log(tabs[0].url)
+  // });
 
   return (
       <BottomNavigation

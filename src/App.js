@@ -63,7 +63,7 @@ const App = () => {
           <Route exact path="/generator" component={Generator}/>
           <Route exact path="/settings" component={Settings}/>
           <Route exact path="/" component={PasswordList}/>
-          <Route exact path="/index.htnl" component={PasswordList}/>
+          <Route exact path="/index.html" component={PasswordList}/>
         </Switch>
 
         <Switch>

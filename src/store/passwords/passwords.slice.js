@@ -18,6 +18,12 @@ export const updatePassword = createAsyncThunk(
   ({data, id}, thunkAPI) => thunkHandler(passwordsService.updatePassword(id, data), thunkAPI)
 )
 
+export const deletePassword = createAsyncThunk(
+  'passwords/deletePassword',
+  ({id}, thunkAPI) => thunkHandler(passwordsService.deletePassword(id), thunkAPI)
+)
+
+
 export const passwordsSlice = createSlice({
   name: 'passwords',
   initialState: {

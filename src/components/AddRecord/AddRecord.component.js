@@ -107,7 +107,7 @@ export const AddRecord = () => {
         margin="normal"
         styles={STYLES.textField}
       />
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
         <div>
           <Button color="secondary"
                   variant="contained"

@@ -4,9 +4,12 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {updatePassword} from "../../store/passwords/passwords.slice";
+import {deletePassword, updatePassword} from "../../store/passwords/passwords.slice";
 import {Toast} from "../Toast/Toast.component";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import {useEffect} from "react";
+import {whoAmIAction} from "../../store/auth/auth.slice";
 
 const STYLES = {
   textField: { padding: '8px' },
@@ -28,7 +31,26 @@ export const EditRecord = ({configuration, id}) => {
   const history = useHistory()
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    dispatch(whoAmIAction())
+  }, [])
+
   const cancelClickHandler = () => {
+    history.push('/')
+  }
+
+  const deleteClickHandler = () => {
+    dispatch(deletePassword({id})).then((res) => {
+      if(!res.error) {
+        setOpen(true)
+        history.push('/')
+      } else if(res.payload?.response?.status === 401) {
+        history.push('/login')
+      } else if (res.error) {
+        setMessage(res.payload?.message)
+        setOpen(true)
+      }
+    })
     history.push('/')
   }
 
@@ -102,14 +124,33 @@ export const EditRecord = ({configuration, id}) => {
         margin="normal"
         styles={STYLES.textField}
       />
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px'}}>
         <div>
-          <Button variant="contained" endIcon={<CancelIcon/>} style={STYLES.btn} onClick={cancelClickHandler}>
+          <Button
+            color="error"
+            variant="contained"
+            style={STYLES.btn}
+            endIcon={<DeleteIcon/>}
+            onClick={deleteClickHandler}>
+            Delete
+          </Button>
+        </div>
+        <div>
+          <Button
+            color="secondary"
+            variant="contained"
+            style={STYLES.btn}
+            endIcon={<CancelIcon/>}
+            onClick={cancelClickHandler}>
             Cancel
           </Button>
         </div>
         <div>
-          <Button variant="contained" endIcon={<SaveIcon/>} style={STYLES.btn} onClick={updateRecordClickHandler}>
+          <Button
+            variant="contained"
+            style={STYLES.btn}
+            endIcon={<SaveIcon/>}
+            onClick={updateRecordClickHandler}>
             Update
           </Button>
         </div>

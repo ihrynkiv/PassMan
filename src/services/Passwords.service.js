@@ -11,4 +11,5 @@ export const passwordsService = {
     const encryptedPassword = getEncryptedPassword(data.password)
     return api.put(`/passwords/${id}`, {...data, password: encryptedPassword})
   },
+  deletePassword: async (id) => api.delete(`/passwords/${id}`),
 }

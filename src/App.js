@@ -27,7 +27,6 @@ const STYLES = {
 
 const App = () => {
   const history = useHistory()
-  history.push('/')
 
   const theme = useTheme()
   const isDarkMode = theme.palette.mode === 'dark'
@@ -42,6 +41,11 @@ const App = () => {
          <SearchHeader
            onHomeClick={() => history.push('/')}
            onAddRecordClick={() => history.push('/add')}/>}
+        />
+        <Route exact path="/index.html" render={() =>
+          <SearchHeader
+            onHomeClick={() => history.push('/')}
+            onAddRecordClick={() => history.push('/add')}/>}
         />
         <Route path="/" render={() =>
           <Header
@@ -59,6 +63,7 @@ const App = () => {
           <Route exact path="/generator" component={Generator}/>
           <Route exact path="/settings" component={Settings}/>
           <Route exact path="/" component={PasswordList}/>
+          <Route exact path="/index.htnl" component={PasswordList}/>
         </Switch>
 
         <Switch>

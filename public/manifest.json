@@ -5,18 +5,14 @@
   "browser_action": {
     "default_popup": "index.html"
   },
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
   "permissions": [
     "tabs",
-    "contextMenus",
-    "storage",
-    "unlimitedStorage",
-    "clipboardRead",
-    "clipboardWrite",
-    "idle",
-    "http://*/*",
-    "https://*/*",
-    "webRequest",
-    "webRequestBlocking"
+    "clipboardWrite"
   ],
   "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='"
 }

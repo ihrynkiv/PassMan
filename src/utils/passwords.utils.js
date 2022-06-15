@@ -6,7 +6,4 @@ export const privateKey = `${window.localStorage.getItem('username')}_${localPri
 
 export const getEncryptedPassword = (password) => encrypt(password, privateKey).toString()
 
-export const getDecryptedPassword = (encryptedPassword) => {
-  const bytes = decrypt(encryptedPassword, privateKey)
-  return bytes.toString(CryptoJS.enc.Utf8);
-}
+export const getDecryptedPassword = (encryptedPassword) => decrypt(encryptedPassword, privateKey).toString(CryptoJS.enc.Utf8);

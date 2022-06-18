@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom"
+    "test": "react-scripts test --env=jsdom"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,7 +38,9 @@
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.16.7",
     "customize-cra": "^1.0.0",
-    "jest": "^28.1.1",
-    "react-app-rewired": "^2.2.1"
+    "jest": "^23.6.0",
+    "jest-puppeteer": "^6.1.0",
+    "react-app-rewired": "^2.2.1",
+    "ts-jest": "<23.10.0"
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, IconButton, InputAdornment, TextField} from "@mui/material";
 import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {updatePasswordAction} from "../../store/auth/auth.slice";
 import {Toast} from "../Toast/Toast.component";

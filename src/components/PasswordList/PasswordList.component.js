@@ -61,7 +61,7 @@ export const PasswordList = () => {
   }
 
   return (
-    <List>
+    <List style={{overflow: 'scroll', height: '450px'}}>
       {
         filteredPasswordList.length ? filteredPasswordList.map((item) => {
           return (

@@ -65,7 +65,7 @@ export const ActiveTab = () => {
   }
 
   return (
-    <List>
+    <List style={{overflow: 'scroll', height: '450px'}}>
       {
         filteredPasswordList.length ? filteredPasswordList.map((item) => {
           return (
